@@ -1,5 +1,37 @@
 const worldsBtn = document.getElementById("worldsBtn");
 const optionsBtn = document.getElementById("optionsBtn");
+const logBuffer = [];
+
+function addLog(type, args) {
+  const message = `[${type.toUpperCase()}] ${args.map(String).join(" ")}`;
+  logBuffer.push(message);
+
+  const output = document.getElementById("log-output");
+  if (output) {
+    output.textContent += message + "\n";
+    output.scrollTop = output.scrollHeight;
+  }
+}
+
+// Preserve original console functions
+const originalLog = console.log;
+const originalWarn = console.warn;
+const originalError = console.error;
+
+console.log = (...args) => {
+  originalLog(...args);
+  addLog("log", args);
+};
+
+console.warn = (...args) => {
+  originalWarn(...args);
+  addLog("warn", args);
+};
+
+console.error = (...args) => {
+  originalError(...args);
+  addLog("error", args);
+};
 
 worldsBtn.addEventListener("click", () => {
   console.log("Worlds menu (not implemented yet)");
