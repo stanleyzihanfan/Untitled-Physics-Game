@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Voxel Automation Game</title>
+  <title>Project Placeholder Universe</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -10,28 +10,24 @@
 
   <!-- Main Menu -->
   <div id="main-menu" class="screen active">
-    <h1>Voxel Automation</h1>
-    <button id="play-btn">Play</button>
-    <button id="options-btn">Options</button>
+    <h1 class="title">Placeholder Universe</h1>
+    <button onclick="goToSaveSelect()">Play</button>
+    <button onclick="goToOptions()">Options</button>
   </div>
 
   <!-- Save Select Screen -->
-  <div id="save-menu" class="screen">
-    <h2>Select World</h2>
-    <div class="placeholder">
-      (Save system not implemented yet)
-    </div>
-    <button id="create-world-btn">Create World</button>
-    <button class="back-btn">Back</button>
+  <div id="save-select" class="screen">
+    <h2>Select Save</h2>
+    <p class="subtle">(Save system not implemented yet)</p>
+    <button onclick="startGame()">Create World</button>
+    <button class="secondary" onclick="goToMainMenu()">Back</button>
   </div>
 
   <!-- Options Screen -->
-  <div id="options-menu" class="screen">
+  <div id="options" class="screen">
     <h2>Options</h2>
-    <div class="placeholder">
-      (Options coming later)
-    </div>
-    <button class="back-btn">Back</button>
+    <p class="subtle">Settings will live here eventually.</p>
+    <button class="secondary" onclick="goToMainMenu()">Back</button>
   </div>
 
   <!-- Game Canvas -->

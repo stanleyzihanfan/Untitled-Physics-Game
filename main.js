@@ -1,28 +1,42 @@
 const screens = {
   main: document.getElementById("main-menu"),
-  save: document.getElementById("save-menu"),
-  options: document.getElementById("options-menu")
+  saves: document.getElementById("save-select"),
+  options: document.getElementById("options")
 };
 
 const canvas = document.getElementById("game-canvas");
 const ctx = canvas.getContext("2d");
 
-function showScreen(screen) {
+function hideAllScreens() {
   Object.values(screens).forEach(s => s.classList.remove("active"));
-  canvas.style.display = "none";
+}
 
-  if (screen) {
-    screen.classList.add("active");
-  }
+function goToMainMenu() {
+  canvas.style.display = "none";
+  hideAllScreens();
+  screens.main.classList.add("active");
+}
+
+function goToSaveSelect() {
+  hideAllScreens();
+  screens.saves.classList.add("active");
+}
+
+function goToOptions() {
+  hideAllScreens();
+  screens.options.classList.add("active");
 }
 
 function startGame() {
-  Object.values(screens).forEach(s => s.classList.remove("active"));
+  hideAllScreens();
   canvas.style.display = "block";
-
   resizeCanvas();
-  initGame();
+  startRenderLoop();
 }
+
+/* ---------- Rendering Placeholder ---------- */
+
+let running = false;
 
 function resizeCanvas() {
   canvas.width = window.innerWidth;
@@ -31,43 +45,22 @@ function resizeCanvas() {
 
 window.addEventListener("resize", resizeCanvas);
 
-// Button wiring
-document.getElementById("play-btn").onclick = () => showScreen(screens.save);
-document.getElementById("options-btn").onclick = () => showScreen(screens.options);
-
-document.getElementById("create-world-btn").onclick = () => {
-  startGame();
-};
-
-document.querySelectorAll(".back-btn").forEach(btn => {
-  btn.onclick = () => showScreen(screens.main);
-});
-
-// Placeholder game loop
-function initGame() {
-  let lastTime = 0;
-
-  function gameLoop(time) {
-    const dt = (time - lastTime) / 1000;
-    lastTime = time;
-
-    update(dt);
-    render();
-
-    requestAnimationFrame(gameLoop);
-  }
-
-  requestAnimationFrame(gameLoop);
+function startRenderLoop() {
+  running = true;
+  requestAnimationFrame(render);
 }
 
-function update(dt) {
-  // Simulation queue will live here later
-}
+function render(time) {
+  if (!running) return;
 
-function render() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = "#000";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  // Placeholder render
-  ctx.fillStyle = "white";
-  ctx.fillText("Game Running", 20, 30);
+  // Placeholder visual
+  ctx.fillStyle = "#0f0";
+  ctx.font = "20px monospace";
+  ctx.fillText("Game running...", 40, 60);
+  ctx.fillText("Rendering + loop OK", 40, 90);
+
+  requestAnimationFrame(render);
 }
