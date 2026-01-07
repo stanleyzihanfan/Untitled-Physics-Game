@@ -6,31 +6,18 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <div id="menu-root">
+    <h1 class="game-title">PROJECT NAME</h1>
 
-  <!-- Main Menu -->
-  <div id="menu-main" class="menu-screen active">
-    <h1 class="title">Project Placeholder</h1>
-    <button onclick="openSaveSelect()">Start Game</button>
-    <button onclick="openOptions()">Options</button>
+    <div class="menu-panel">
+      <button class="menu-button" id="worldsBtn">Worlds</button>
+      <button class="menu-button" id="optionsBtn">Options</button>
+    </div>
+
+    <div class="menu-footer">
+      <span>Browser Prototype</span>
+    </div>
   </div>
-
-  <!-- Save Select Screen -->
-  <div id="menu-saves" class="menu-screen">
-    <h2>Select Save</h2>
-    <p class="placeholder-text">No saves yet.</p>
-    <button onclick="createWorld()">Create World</button>
-    <button class="secondary" onclick="backToMain()">Back</button>
-  </div>
-
-  <!-- Options Screen -->
-  <div id="menu-options" class="menu-screen">
-    <h2>Options</h2>
-    <p class="placeholder-text">Options will live here.</p>
-    <button class="secondary" onclick="backToMain()">Back</button>
-  </div>
-
-  <!-- Game Canvas -->
-  <canvas id="game-canvas"></canvas>
 
   <script src="main.js"></script>
 </body>
