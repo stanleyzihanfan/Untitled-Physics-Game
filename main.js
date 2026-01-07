@@ -7,11 +7,18 @@ function addLog(type, args) {
   logBuffer.push(message);
 
   const output = document.getElementById("log-output");
-  if (output) {
-    output.textContent += message + "\n";
+  if (!output) return;
+
+  const isAtBottom =
+    output.scrollTop + output.clientHeight >= output.scrollHeight - 5;
+
+  output.textContent += message + "\n";
+
+  if (isAtBottom) {
     output.scrollTop = output.scrollHeight;
   }
 }
+
 
 // Preserve original console functions
 const originalLog = console.log;
