@@ -42,3 +42,23 @@ optionsBtn.addEventListener("click", () => {
   console.log("Options menu (not implemented yet)");
   // Later: switch to options screen
 });
+
+const toggleLogsBtn = document.getElementById("toggleLogsBtn");
+const logPanel = document.getElementById("log-panel");
+const downloadLogsBtn = document.getElementById("downloadLogsBtn");
+
+toggleLogsBtn.addEventListener("click", () => {
+  logPanel.hidden = !logPanel.hidden;
+});
+
+downloadLogsBtn.addEventListener("click", () => {
+  const blob = new Blob([logBuffer.join("\n")], { type: "text/plain" });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "game_logs.txt";
+  a.click();
+
+  URL.revokeObjectURL(url);
+});
