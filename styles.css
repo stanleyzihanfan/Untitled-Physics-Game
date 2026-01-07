@@ -1,3 +1,4 @@
+/* Global reset */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -5,59 +6,72 @@
   font-family: system-ui, sans-serif;
 }
 
+/* Fullscreen layout */
 body {
-  background: radial-gradient(circle at top, #111, #000);
-  color: #eee;
+  background: radial-gradient(circle at top, #1a1a2e, #0b0b14);
+  color: #e0e0ff;
   height: 100vh;
   overflow: hidden;
 }
 
-.screen {
+/* Menu screens */
+.menu-screen {
+  position: absolute;
+  inset: 0;
   display: none;
-  height: 100vh;
-  width: 100vw;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 16px;
+  gap: 1rem;
+  background: rgba(0, 0, 0, 0.6);
 }
 
-.screen.active {
+/* Visible screen */
+.menu-screen.active {
   display: flex;
 }
 
+/* Title */
 .title {
   font-size: 3rem;
-  margin-bottom: 24px;
+  margin-bottom: 2rem;
 }
 
+/* Buttons */
 button {
-  background: #222;
-  color: #eee;
-  border: 1px solid #555;
-  padding: 12px 24px;
+  padding: 0.75rem 2rem;
   font-size: 1rem;
+  border: none;
+  border-radius: 6px;
   cursor: pointer;
-  min-width: 200px;
+  background: #5a67ff;
+  color: white;
+  transition: transform 0.1s ease, background 0.2s ease;
 }
 
 button:hover {
-  background: #333;
+  background: #7683ff;
+  transform: translateY(-1px);
 }
 
 button.secondary {
-  background: transparent;
-  border-color: #444;
+  background: #444;
 }
 
-.subtle {
-  font-size: 0.9rem;
-  color: #aaa;
+button.secondary:hover {
+  background: #666;
 }
 
-/* Canvas fills screen when game starts */
+/* Placeholder text */
+.placeholder-text {
+  opacity: 0.7;
+  margin-bottom: 1rem;
+}
+
+/* Game canvas */
 #game-canvas {
   display: none;
   width: 100vw;
   height: 100vh;
+  background: black;
 }

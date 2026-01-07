@@ -1,42 +1,44 @@
 const screens = {
-  main: document.getElementById("main-menu"),
-  saves: document.getElementById("save-select"),
-  options: document.getElementById("options")
+  main: document.getElementById("menu-main"),
+  saves: document.getElementById("menu-saves"),
+  options: document.getElementById("menu-options")
 };
 
 const canvas = document.getElementById("game-canvas");
 const ctx = canvas.getContext("2d");
 
-function hideAllScreens() {
-  Object.values(screens).forEach(s => s.classList.remove("active"));
+function showScreen(screenName) {
+  for (const key in screens) {
+    screens[key].classList.remove("active");
+  }
+  screens[screenName].classList.add("active");
 }
 
-function goToMainMenu() {
-  canvas.style.display = "none";
-  hideAllScreens();
-  screens.main.classList.add("active");
+function openSaveSelect() {
+  showScreen("saves");
 }
 
-function goToSaveSelect() {
-  hideAllScreens();
-  screens.saves.classList.add("active");
+function openOptions() {
+  showScreen("options");
 }
 
-function goToOptions() {
-  hideAllScreens();
-  screens.options.classList.add("active");
+function backToMain() {
+  showScreen("main");
 }
 
-function startGame() {
-  hideAllScreens();
+function createWorld() {
+  // Hide menus
+  for (const key in screens) {
+    screens[key].classList.remove("active");
+  }
+
+  // Show canvas
   canvas.style.display = "block";
   resizeCanvas();
-  startRenderLoop();
+
+  // Placeholder render loop
+  startGame();
 }
-
-/* ---------- Rendering Placeholder ---------- */
-
-let running = false;
 
 function resizeCanvas() {
   canvas.width = window.innerWidth;
@@ -45,22 +47,30 @@ function resizeCanvas() {
 
 window.addEventListener("resize", resizeCanvas);
 
-function startRenderLoop() {
-  running = true;
-  requestAnimationFrame(render);
-}
+function startGame() {
+  let t = 0;
 
-function render(time) {
-  if (!running) return;
+  function loop() {
+    t += 0.01;
 
-  ctx.fillStyle = "#000";
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+    // Simple placeholder rendering
+    ctx.fillStyle = "black";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  // Placeholder visual
-  ctx.fillStyle = "#0f0";
-  ctx.font = "20px monospace";
-  ctx.fillText("Game running...", 40, 60);
-  ctx.fillText("Rendering + loop OK", 40, 90);
+    ctx.fillStyle = "white";
+    ctx.font = "20px sans-serif";
+    ctx.fillText("Game Running", 20, 40);
+    ctx.fillText("Replace this with your renderer", 20, 70);
 
-  requestAnimationFrame(render);
+    // Animated dot, just to prove life
+    const x = canvas.width / 2 + Math.cos(t) * 100;
+    const y = canvas.height / 2 + Math.sin(t) * 100;
+    ctx.beginPath();
+    ctx.arc(x, y, 10, 0, Math.PI * 2);
+    ctx.fill();
+
+    requestAnimationFrame(loop);
+  }
+
+  loop();
 }

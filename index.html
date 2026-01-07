@@ -2,32 +2,31 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Project Placeholder Universe</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project Placeholder Name</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
   <!-- Main Menu -->
-  <div id="main-menu" class="screen active">
-    <h1 class="title">Placeholder Universe</h1>
-    <button onclick="goToSaveSelect()">Play</button>
-    <button onclick="goToOptions()">Options</button>
+  <div id="menu-main" class="menu-screen active">
+    <h1 class="title">Project Placeholder</h1>
+    <button onclick="openSaveSelect()">Start Game</button>
+    <button onclick="openOptions()">Options</button>
   </div>
 
   <!-- Save Select Screen -->
-  <div id="save-select" class="screen">
+  <div id="menu-saves" class="menu-screen">
     <h2>Select Save</h2>
-    <p class="subtle">(Save system not implemented yet)</p>
-    <button onclick="startGame()">Create World</button>
-    <button class="secondary" onclick="goToMainMenu()">Back</button>
+    <p class="placeholder-text">No saves yet.</p>
+    <button onclick="createWorld()">Create World</button>
+    <button class="secondary" onclick="backToMain()">Back</button>
   </div>
 
   <!-- Options Screen -->
-  <div id="options" class="screen">
+  <div id="menu-options" class="menu-screen">
     <h2>Options</h2>
-    <p class="subtle">Settings will live here eventually.</p>
-    <button class="secondary" onclick="goToMainMenu()">Back</button>
+    <p class="placeholder-text">Options will live here.</p>
+    <button class="secondary" onclick="backToMain()">Back</button>
   </div>
 
   <!-- Game Canvas -->
