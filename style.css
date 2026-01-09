@@ -94,7 +94,7 @@ body {
   flex-direction: column;
 
   resize: vertical;           /* Native browser resizing */
-  overflow: auto;           /* Prevent outer scroll */
+  overflow: hidden;           /* Prevent outer scroll */
   min-height: 100px;
   max-height: 60vh;
 }
