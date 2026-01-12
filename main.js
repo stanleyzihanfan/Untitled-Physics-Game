@@ -39,8 +39,12 @@ console.error = (...args) => {
 };
 
 const toggleLogBtn=document.getElementById("toggle-log");
+const testBtn=document.getElementById("testBtn");
 const logPanel=document.getElementById("log-panel");
 toggleLogBtn.addEventListener("click",()=>{
   logPanel.classList.toggle("hidden");
   console.log("Clicked");
+});
+testBtn.addEventListener("click",()=>{
+  console.log("test");
 });
