@@ -136,34 +136,4 @@ body {
   display: none;
 }
 
-/*Sample dragging*/
-.window {
-    position: absolute;
-    width: 300px;
-    height: 200px;
-    background: #f0f0f0;
-    border: 1px solid #ccc;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    overflow: hidden; /* Keeps content inside while resizing */
-}
-
-.topbar {
-    padding: 10px;
-    background: #e0e0e0;
-    cursor: move; /* Indicates it can be dragged */
-}
-
-.resizer {
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    background: #000; /* Visible handles */
-    z-index: 10;
-}
-
-/* Position handles at corners */
-.top-left { top: -5px; left: -5px; cursor: nwse-resize; }
-.top-right { top: -5px; right: -5px; cursor: nesw-resize; }
-.bottom-left { bottom: -5px; left: -5px; cursor: nesw-resize; }
-.bottom-right { bottom: -5px; right: -5px; cursor: nwse-resize; }
 
