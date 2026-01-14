@@ -61,11 +61,11 @@ const toggleLogsBtn = document.getElementById("toggleLogsBtn");
 const logPanel = document.getElementById("log-panel");
 const downloadLogsBtn = document.getElementById("downloadLogsBtn");
 
-let logsvisible=false;
+let logsvisible=true;
 toggleLogsBtn.addEventListener("click", () => {
   logsvisible=!logsvisible;
   logPanel.style.display = logsVisible ? "flex" : "none";
-  console.log(logsVisible);
+  console.log("logsVisible: "+logsVisible);
 });
 
 downloadLogsBtn.addEventListener("click", () => {
