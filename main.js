@@ -41,6 +41,16 @@ console.error = (...args) => {
   addLog("error", args);
 };
 
+//Handle errors
+window.addEventListener('error', function(event) {
+    console.log("Uncaught Error: " + event.message + " at " + event.filename + ":" + event.lineno);
+});
+
+window.addEventListener('unhandledrejection', function(event) {
+    console.log("Unhandled Promise Rejection: " + event.reason);
+});
+
+
 // =======================
 // UI logic
 // =======================
