@@ -80,44 +80,29 @@ body {
 
 #log-panel {
   position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 200px;              /* Default height */
-  background: rgba(0, 0, 0, 0.92);
-  color: #00ff00;
-  font-family: monospace;
-  font-size: 12px;
-  z-index: 1000;
-
+  top: 40px;
+  right: 0;
+  width: 350px;
+  height: calc(100vh - 40px);
+  background: #000;
+  color: #0f0;
   display: flex;
   flex-direction: column;
-
-  resize: vertical;           /* Native browser resizing */
-  overflow: hidden;           /* Prevent outer scroll */
-  min-height: 100px;
-  max-height: 60vh;
+  border-left: 2px solid #333;
 }
 
 /* Header bar */
 #log-header {
+  padding: 6px;
   background: #111;
   border-bottom: 1px solid #333;
-  padding: 6px 10px;
-
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  cursor: ns-resize;          /* Visual hint */
-  user-select: none;
 }
 
 /* Scrollable log content */
 #log-output {
   flex: 1;
   overflow-y: auto;
-  padding: 8px;
+  padding: 6px;
   white-space: pre-wrap;
 }
 
@@ -129,5 +114,50 @@ body {
   padding: 4px 8px;
   cursor: pointer;
   font-size: 12px;
+}
+
+/* resize handles */
+.resize-handle {
+  position: absolute;
+}
+
+.resize-handle.left {
+  left: 0;
+  top: 0;
+  width: 6px;
+  height: 100%;
+  cursor: ew-resize;
+}
+
+.resize-handle.top,
+.resize-handle.bottom {
+  height: 6px;
+  width: 100%;
+  cursor: ns-resize;
+}
+
+.resize-handle.top {
+  top: 0;
+}
+
+.resize-handle.bottom {
+  bottom: 0;
+}
+
+.resize-handle.top-left,
+.resize-handle.bottom-left {
+  width: 10px;
+  height: 10px;
+  left: 0;
+}
+
+.resize-handle.top-left {
+  top: 0;
+  cursor: nwse-resize;
+}
+
+.resize-handle.bottom-left {
+  bottom: 0;
+  cursor: nesw-resize;
 }
 
