@@ -61,9 +61,9 @@ const toggleLogsBtn = document.getElementById("toggleLogsBtn");
 const logPanel = document.getElementById("log-panel");
 const downloadLogsBtn = document.getElementById("downloadLogsBtn");
 
-let logsvisible=true;
+let logsVisible=false;
 toggleLogsBtn.addEventListener("click", () => {
-  logsvisible=!logsvisible;
+  logsVisible=!logsVisible;
   logPanel.style.display = logsVisible ? "flex" : "none";
   console.log("logsVisible: "+logsVisible);
 });
