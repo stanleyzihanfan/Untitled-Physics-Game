@@ -65,6 +65,7 @@ let logsvisible=false;
 toggleLogsBtn.addEventListener("click", () => {
   logsvisible=!logsvisible;
   logPanel.style.display = logsVisible ? "flex" : "none";
+  console.log(logsVisible);
 });
 
 downloadLogsBtn.addEventListener("click", () => {
