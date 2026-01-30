@@ -7,25 +7,31 @@
 </head>
 <body>
     <div id="menu-root">
-        <body class="game-title">Untitled Physics Game</body>
-        <div class="game-panel">
-            <div class="menu-panel">
-                <button class="menu-button" id="testBtn">Testing</button>
-                <button class="menu-button" id="toggle-log">Toggle Logs</button>
-            </div>
+        <h1 class="game-title">PROJECT NAME</h1>
+
+        <div class="menu-panel">
+        <button class="menu-button" id="worldsBtn">Worlds</button>
+        <button class="menu-button" id="optionsBtn">Options</button>
+        <button class="menu-button" id="toggleLogsBtn">Toggle Logs</button>
+        </div>
+
+        <div class="menu-footer">
+        <span>Browser Prototype</span>
         </div>
     </div>
     <div id="log-panel">
-        <!-- <div id="log-header">
-            <p>Logs</p>
+        <div id="log-header">
+            <span>Logs</span>
             <button id="downloadLogsBtn">Download</button>
-        </div> -->
+        </div>
         <div id="log-output"></div>
+        <!-- resize handles -->
+        <div class="resize-handle left"></div>
+        <div class="resize-handle top"></div>
+        <div class="resize-handle bottom"></div>
+        <div class="resize-handle top-left"></div>
+        <div class="resize-handle bottom-left"></div>
     </div>
     <script src="main.js"></script>
-    <!-- <div id="log-panel">
-        <body id="log-header">Logs</body>
-        <body>Log Test</body>
-    </div> -->
 </body>
 </html>
