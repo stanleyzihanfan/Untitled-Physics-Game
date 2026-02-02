@@ -188,14 +188,18 @@ class divResizeHandler{
         this.maxH=maxH;
         this.isResizing=false;
         this.startx=null;
+        this.starty=null;
+        this.startheight=null;
         this.startwidth=null;
         this.div.addEventListener("mousedown",startResize.bind(this))
     }
 
     startResize(e) {
-        isResizing = true;
-        startX = e.clientX;
-        startWidth = logPanel.offsetWidth;
+        if (!e.target.classlist.contains("resize-handle")) return;
+        this.isResizing = true;
+        this.startx = e.clientX;
+        this.startWidth = logPanel.offsetWidth;
+        this.starty = e.clientHeight;
         document.addEventListener("mousemove", resize.bind(this));
         document.addEventListener("mouseup", stopResize.bind(this));
     }
@@ -203,8 +207,10 @@ class divResizeHandler{
     resize(e) {
         if (!isResizing) return;
 
-        const dx = startX - e.clientX;
-        let newWidth = startWidth + dx;
+        const dx = this.startx - e.clientX;
+        let newWidth = this.startwidth + dx;
+        const dy = this.starty - e.clientHeight;
+        let newHeight = this.startheight + dy;
 
         newWidth = Math.max(minWidth, Math.min(maxWidth, newWidth));
         logPanel.style.width = newWidth + "px";
