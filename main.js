@@ -196,8 +196,8 @@ class divResizeHandler{
         this.isResizing=false;
         this.startx=null;
         this.starty=null;
-        this.startheight=null;
-        this.startwidth=null;
+        this.startHeight=null;
+        this.startWidth=null;
         this.div.addEventListener("mousedown",startResize.bind(this))
     }
 
@@ -205,8 +205,9 @@ class divResizeHandler{
         if (!e.target.classlist.contains("resize-handle")) return;
         this.isResizing = true;
         this.startx = e.clientX;
-        this.startWidth = logPanel.offsetWidth;
-        this.starty = e.clientHeight;
+        this.startWidth = this.div.offsetWidth;
+        this.starty = e.clientY;
+        this.startHeight = this.div.offsetHeight;
         document.addEventListener("mousemove", resize.bind(this));
         document.addEventListener("mouseup", stopResize.bind(this));
     }
@@ -215,12 +216,14 @@ class divResizeHandler{
         if (!isResizing) return;
 
         const dx = this.startx - e.clientX;
-        let newWidth = this.startwidth + dx;
-        const dy = this.starty - e.clientHeight;
-        let newHeight = this.startheight + dy;
+        let newWidth = this.startWidth + dx;
+        const dy = this.starty - e.clientY;
+        let newHeight = this.startHeight + dy;
 
-        newWidth = Math.max(minWidth, Math.min(maxWidth, newWidth));
-        logPanel.style.width = newWidth + "px";
+        newWidth = Math.max(this.minW, Math.min(this.maxW,this.newWidth));
+        newHeight = Math.max(this.minH,Math.min(this.maxH,this.newHeight));
+        this.div.style.width = newWidth + "px";
+        this.div.style.height= newHeight + "px";
     }
 
     stopResize() {
