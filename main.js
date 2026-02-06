@@ -165,8 +165,10 @@ class UIHandler{
     toggleWindow(window){
         if (this.uiActive.includes(window.div.id)){
             this.removeWindow(window.div);
+            return false;
         }else{
             this.addWindow(window.div);
+            return true;
         }
     }
 }
