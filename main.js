@@ -162,6 +162,11 @@ class UIHandler{
         window.removeUI?.();
     }
 
+    /**
+     * Toggles display of window
+     * @param {*} window UI object of window to be toggled
+     * @returns true if toggled on, false if toggled off
+     */
     toggleWindow(window){
         if (this.uiActive.includes(window.div.id)){
             this.removeWindow(window.div);
