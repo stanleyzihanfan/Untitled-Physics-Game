@@ -239,41 +239,9 @@ class divResizeHandler{
 
 }
 
-// =======================
-// Custom resize logic
-// =======================
-let isResizing = false;
-let startX;
-let startWidth;
-
-const minWidth = 200;
-const maxWidth = 800;
-
-function startResize(e) {
-    isResizing = true;
-    startX = e.clientX;
-    startWidth = logPanel.offsetWidth;
-    document.addEventListener("mousemove", resize);
-    document.addEventListener("mouseup", stopResize);
-}
-
-function resize(e) {
-    if (!isResizing) return;
-
-    const dx = startX - e.clientX;
-    let newWidth = startWidth + dx;
-
-    newWidth = Math.max(minWidth, Math.min(maxWidth, newWidth));
-    logPanel.style.width = newWidth + "px";
-}
-
-function stopResize() {
-    isResizing = false;
-    document.removeEventListener("mousemove", resize);
-    document.removeEventListener("mouseup", stopResize);
-}
-
-// Attach resize handlers (edges + corners, but horizontal only)
-document.querySelectorAll(".resize-handle").forEach(handle => {
-    handle.addEventListener("mousedown", startResize);
-});
+console.log("Initializing...");
+let mainMenu=new MainMenuUI();
+let logUI=new LogUI();
+let UIhandler=new UIHandler();
+UIhandler.addWindow(mainMenu);
+UIhandler.addWindow(logUI);
