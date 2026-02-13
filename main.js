@@ -145,7 +145,7 @@ class UIHandler{
      */
     addWindow(window){
         this.uiActive.push(window.div.id);
-        window.style.display = "flex";
+        window.div.style.display = "flex";
         window.addUI?.();
     }
 
@@ -158,7 +158,7 @@ class UIHandler{
         if (index > -1) {
             this.uiActive.splice(index, 1); // Only splice if the item is found
         }
-        window.style.display = "none";
+        window.div.style.display = "none";
         window.removeUI?.();
     }
 
@@ -240,8 +240,14 @@ class divResizeHandler{
 }
 
 console.log("Initializing...");
-let mainMenu=new MainMenuUI();
-let logUI=new LogUI();
+//alert("0");
+//alert("1");
+//alert("2");
 let UIhandler=new UIHandler();
+let logUI=new LogUI(UIhandler);
+let mainMenu=new MainMenuUI();
+//alert("3");
 UIhandler.addWindow(mainMenu);
+alert("4");
 UIhandler.addWindow(logUI);
+alert(UIhandler.uiActive);
