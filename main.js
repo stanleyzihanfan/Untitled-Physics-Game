@@ -233,6 +233,7 @@ class divResizeHandler{
     }
 
     cleanUp(){
+        this.stopResize();
         document.removeEventListener("mousedown",startResize.bind(this));
     }
 
