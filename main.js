@@ -232,6 +232,10 @@ class divResizeHandler{
         document.removeEventListener("mouseup", stopResize.bind(this));
     }
 
+    cleanUp(){
+        document.removeEventListener("mousedown",startResize.bind(this));
+    }
+
 }
 
 // =======================
