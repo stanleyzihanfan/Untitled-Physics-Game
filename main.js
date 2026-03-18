@@ -45,7 +45,6 @@ console.error = (...args) => {
 window.addEventListener('error', function(event) {
     console.log("Uncaught Error: " + event.message + " at " + event.filename + ":" + event.lineno);
 });
-
 window.addEventListener('unhandledrejection', function(event) {
     console.log("Unhandled Promise Rejection: " + event.reason);
 });
@@ -54,18 +53,103 @@ window.addEventListener('unhandledrejection', function(event) {
 // =======================
 // UI logic
 // =======================
-const worldsBtn = document.getElementById("worldsBtn");
-const optionsBtn = document.getElementById("optionsBtn");
+//UI registration and modification functions
+//Dictionary of all register/unregister functions
+const uiEvents={};
+/**
+ * Registers an UI
+ * @param {string} name Name of UI element to register
+ * @param {Function[][]} param1 2D Array with two list that will run when UI is created and when it is deleted, [[onEnter,onEnter1],[onExit,onExit1]].
+ * @param {boolean} [override=false] If the new functions should override all old functions. Default false, will append current functions to original functions.
+ */
+function registerUI(name,[onEnter,onExit],override=false){
+    if (override){
+        uiEvents[name]=[onEnter,onExit];
+    }else{
+        if (Object.hasOwn(uiEvents,name)){
+            for (let i=0;i<onEnter.length;i++){
+                uiEvents[name][0].push(onEnter[i]);
+            }
+            for (let i=0;i<onExit.length;i++){
+                uiEvents[name][1].push(onExit[i]);
+            }
+        }else{
+            uiEvents[name]=[onEnter,onExit];
+        }
+    }
+}
+/**
+ * Unregisters UI/UI functions
+ * @param {string} name Name of UI element to register
+ * @param {Function[][]} param1 2D Array with two lists of functions to delete [[onEnter,onEnter1],[onExit,onExit1]].
+ * @param {boolean} override True=delete all functions(ignores param1), False=delete only specified functions
+ */
+function unregisterUI(name,[onEnter,onExit],override=true){
+    if (override){
+        uiEvents[name]=[];
+    }else{
+        for (let i=0;i<onEnter.length;i++){
+            let index=uiEvents[name][0].indexOf(onEnter[i]);
+            if (index!=-1){
+                uiEvents[name][0].splice(index,1);
+            }
+        }
+        for (let i=0;i<onExit.length;i++){
+            let index=uiEvents[name][1].indexOf(onExit[i]);
+            if (index!=-1){
+                uiEvents[name][1].splice(index,1);
+            }
+        }
+    }
+}
+/**
+ * Executes onEnter functions of UI with name
+ * @param {string} name Name of UI
+ */
+function openUI(name){
+    for (let i=0;i<uiEvents[name][0].length;i++){
+        uiEvents[name][0][i]();
+    }
+}
+/**
+ * Executes onExit functions of UI with name
+ * @param {string} name Name of UI
+ */
+function closeUI(name){
+    for (let i=0;i<uiEvents[name][1].length;i++){
+        uiEvents[name][1][i]();
+    }
+}
 
-worldsBtn.addEventListener("click", () => {
+//main menu
+/**
+ * Main menu worlds button
+ */
+function mainMenuWorldsBtn(){
     console.log("Worlds menu (not implemented yet)");
-    // Later: switch to world selection screen
-});
-
-optionsBtn.addEventListener("click", () => {
+}
+/**
+ * Main menu Options button
+ */
+function mainMenuOptionsBtn(){
     console.log("Options menu (not implemented yet)");
-    // Later: switch to options screen
-});
+}
+/**
+ * Main menu onEnter function
+ */
+function initMainMenu(){
+    document.getElementById("worldsBtn").addEventListener("click",mainMenuWorldsBtn);
+    document.getElementById("optionsBtn").addEventListener("click",mainMenuOptionsBtn);
+    document.getElementById("menu-root").style.display="inline";
+}
+/**
+ * Main menu onExit function
+ */
+function stopMainMenu(){
+    document.getElementById("worldsBtn").removeEventListener("click",mainMenuWorldsBtn);
+    document.getElementById("optionsBtn").removeEventListener("click",mainMenuOptionsBtn);
+    document.getElementById("menu-panel").style.display="none";
+}
 
 const toggleLogsBtn = document.getElementById("toggleLogsBtn");
 const logPanel = document.getElementById("log-panel");
@@ -79,8 +163,11 @@ toggleLogsBtn.addEventListener("click", () => {
 });
 
 downloadLogsBtn.addEventListener("click", () => {
+    console.log("Generating temporary download URL...");
     const blob = new Blob([logBuffer.join("\n")], { type: "text/plain" });
     const url = URL.createObjectURL(blob);
+    console.log("URL Generated!");
+    console.log("Starting download...");
 
     const a = document.createElement("a");
     a.href = url;
@@ -89,6 +176,8 @@ downloadLogsBtn.addEventListener("click", () => {
 
     URL.revokeObjectURL(url);
 });
+registerUI("mainMenu",[[initMainMenu],[stopMainMenu]],false);
+openUI("mainMenu");
 
 // =======================
 // Custom resize logic
