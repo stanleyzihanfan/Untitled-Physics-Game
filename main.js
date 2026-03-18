@@ -167,12 +167,12 @@ downloadLogsBtn.addEventListener("click", () => {
     const blob = new Blob([logBuffer.join("\n")], { type: "text/plain" });
     const url = URL.createObjectURL(blob);
     console.log("URL Generated!");
-    console.log("Starting download...");
 
     const a = document.createElement("a");
     a.href = url;
     a.download = "game_logs.txt";
     a.click();
+    console.log("Download started");
 
     URL.revokeObjectURL(url);
 });
